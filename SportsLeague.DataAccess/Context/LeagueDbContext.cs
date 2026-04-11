@@ -11,7 +11,7 @@ public class LeagueDbContext : DbContext
     }
 
     public DbSet<Team> Teams => Set<Team>();
-
+    public DbSet<Player> Players => Set<Player>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
