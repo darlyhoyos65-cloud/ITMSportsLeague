@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SportsLeague.Domain.Interfaces.Services
 {
-    internal class SponsorService : ISponsorService
+    public class SponsorService : ISponsorService
     {
 
         private readonly ISponsorRepository _sponsorRepository;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SportsLeague.Domain.Interfaces.Services
 {
-    internal interface ISponsorService
+    public interface ISponsorService
     {
         Task<IEnumerable<Sponsor>> GetAllAsync();
         Task<Sponsor?> GetByIdAsync(int id);
