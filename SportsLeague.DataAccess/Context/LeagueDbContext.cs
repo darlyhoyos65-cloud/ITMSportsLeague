@@ -104,7 +104,7 @@ public class LeagueDbContext : DbContext
 
             // Relación con Team
             entity.HasOne(tt => tt.Team)
-                  .WithMany(t => t.TournamentTeams)
+                  .WithMany(t => t.TournamentTeam)
                   .HasForeignKey(tt => tt.TeamId)
                   .OnDelete(DeleteBehavior.Cascade);
 
