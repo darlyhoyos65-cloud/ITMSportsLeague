@@ -35,7 +35,7 @@ builder.Services.AddScoped<IMatchService, MatchService>();
 builder.Services.AddScoped<IMatchResultRepository, MatchResultRepository>();
 builder.Services.AddScoped<IGoalRepository, GoalRepository>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
-
+builder.Services.AddScoped<IStandingsService, StandingsService>();
 
 
 // ── AutoMapper ──
