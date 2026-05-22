@@ -23,7 +23,9 @@ public class LeagueDbContext : DbContext
     public DbSet<MatchResult> MatchResults => Set<MatchResult>();
     public DbSet<Goal> Goals => Set<Goal>();
     public DbSet<Card> Cards => Set<Card>();
-    
+    public DbSet<MatchLineUp> MatchLineUps => Set<MatchLineUp>();
+
+
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -267,11 +269,41 @@ public class LeagueDbContext : DbContext
           .HasForeignKey(c => c.PlayerId)
           .OnDelete(DeleteBehavior.Restrict);
 });
-     
 
+        // ── MatchLineUp Configuration ──
+        modelBuilder.Entity<MatchLineUp>(entity =>
+        {
+            entity.HasKey(ml => ml.Id);
+            entity.Property(ml => ml.Position)
+                  .IsRequired()
+                  .HasMaxLength(50);
+            entity.Property(ml => ml.IsStarter)
+                  .IsRequired();
+            entity.Property(ml => ml.CreatedAt)
+                  .IsRequired();
+            entity.Property(ml => ml.UpdatedAt)
+                  .IsRequired(false);
 
+            // Relación con Match (Cascade)
+            entity.HasOne(ml => ml.Match)
+                  .WithMany(m => m.LineUps)
+                  .HasForeignKey(ml => ml.MatchId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            // Relación con Player (Restrict)
+            entity.HasOne(ml => ml.Player)
+                  .WithMany(p => p.LineUps)
+                  .HasForeignKey(ml => ml.PlayerId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Índice único compuesto: un jugador solo una vez por partido
+            entity.HasIndex(ml => new { ml.MatchId, ml.PlayerId })
+                  .IsUnique();
+        });
     }
 }
+
+    
 
 
 

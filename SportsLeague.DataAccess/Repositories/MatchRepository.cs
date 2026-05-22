@@ -52,5 +52,10 @@ public class MatchRepository : GenericRepository<Match>, IMatchRepository
             .ThenBy(m => m.MatchDate)
             .ToListAsync();
     }
+
+    public Task<Match?> GetWithTeamsAndStatusAsync(int matchId)
+    {
+        throw new NotImplementedException();
+    }
 }
 
